@@ -4,7 +4,7 @@ import xml.dom.minidom as minidom
 # T. Linder, June 2023
 # refactored by C. Nugent, September 2023
 
-def generate_xml(filename, header_data, obs_data):
+def generate_xml(header_data, obs_data):
     """
     Takes all the ADES 2017 data and puts it into XML tree.
     Call this program the first time you're creating the 
@@ -16,7 +16,6 @@ def generate_xml(filename, header_data, obs_data):
     Returns:
         XMLElement, ades, obsData: the xml data 
     """
-    #
     ades = XMLElement.Element('ades', version="2017")
     obsBlock = XMLElement.SubElement(ades, "obsBlock")
 
@@ -31,7 +30,6 @@ def generate_xml(filename, header_data, obs_data):
 
     name = XMLElement.SubElement( observatory, "name")
     name.text = header_data["observatoryName"] 
-    ##############################################################
 
     #data People
     submitter = XMLElement.SubElement( obsContext, "submitter")
@@ -129,6 +127,9 @@ if __name__ == "__main__":
         #The reported time precision should be appropriate for the 
         #astrometric accuracy, but no more than 6 digits are permitted 
         #after the decimal. The trailing Z indicates UTC and is required.
+        # Reccomend use "from astropy.time import Time" and then something like
+        # str(time.isot)+'Z' where time is a Time astropy object with the
+        # time of your observation.
         'obsTime': '1801-01-01T12:23:34.12Z',
         #'rmsTime': '3' #Random uncertainty in obsTime in seconds as estimated by the observer
         'ra': '3.639', # decimal degrees in the J2000.0 reference frame
@@ -163,7 +164,7 @@ if __name__ == "__main__":
     xml_filename="Catalog.xml"
 
     # generate the header and the first observation.
-    XMLElement, ades, obsData = generate_xml(xml_filename,ades_dict, ades_obs_dict)
+    XMLElement, ades, obsData = generate_xml(ades_dict, ades_obs_dict)
 
     #update your observations dictionary with your new obs, e.g.
     ades_obs_dict['mag']=10.1
