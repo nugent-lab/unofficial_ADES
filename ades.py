@@ -101,10 +101,10 @@ if __name__ == "__main__":
     ades_dict = {
         "mpcCode": "535",  # MPC-assigned observatory code
         "observatoryName": "Palermo Astronomical Observatory",
-        "submitter": "Janelle Moneae",
-        "observers": "David Bowie",
-        "measurers": "Mobb Deep",
-        "coinvestigators": "Etta James",
+        "submitter": "D. Bowie",
+        "observers": "B. Yonce",
+        "measurers": "D. Bowie",
+        "coinvestigators": "F. Apple",
         "telescope_design": "reflector",
         "telescope_aperture": "1.1",
         "telescope_detector": "CCD",
